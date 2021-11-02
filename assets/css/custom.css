@@ -3,3 +3,7 @@ div.dataTables_wrapper div.dataTables_filter input {
     display: inline-block;
     width: 300px !important;
 }
+
+.height-100{
+    height: 100px !important;
+}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.html import format_html
 # Create your models here.
 
 
@@ -15,7 +16,8 @@ class Category(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
+
 
 
 class Product(models.Model):
@@ -32,5 +34,6 @@ class Product(models.Model):
     quantity = models.IntegerField(default=0)
     sku = models.CharField(max_length=128)
     status = models.CharField(max_length=10, choices=StatusOptions.choices, default=StatusOptions.Active)
+    image = models.ImageField(upload_to="images/products", null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)

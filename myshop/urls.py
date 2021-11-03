@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('dashboard.urls')),
+    path('', include('home.urls')),
+    path('dashboard/', include('dashboard.urls')),
     path('product/', include('product.urls')),
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True)),
     path('', include('django.contrib.auth.urls')),

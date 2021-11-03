@@ -22,5 +22,6 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['long_desc', 'category__name', 'slug', 'name', 'price', 'quantity', 'sku', 'status']
     list_filter = ['status', 'category', 'price', 'created_at']
     ordering = ('id', 'name', 'category', 'price', 'quantity', 'sku', 'status', 'created_at')
+    readonly_fields = ('image_tag',)
 
 admin.site.register(Product, ProductAdmin)

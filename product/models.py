@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.html import format_html
-# Create your models here.
+from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -25,6 +25,13 @@ class Product(models.Model):
         Active = 'active'
         Inactive = 'inactive'
 
+    class TagOptions(models.TextChoices):
+        Featured = 'Featured'
+        New_Arrival = 'New Arrival'
+        Top_Rated = 'Top Rated'
+        Best_Selling = 'Best Selling'
+        On_Sale = 'On Sale'
+
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
@@ -33,7 +40,12 @@ class Product(models.Model):
     price = models.FloatField(default=0)
     quantity = models.IntegerField(default=0)
     sku = models.CharField(max_length=128)
+    tag = models.CharField(null=True, max_length=50, choices=TagOptions.choices)
     status = models.CharField(max_length=10, choices=StatusOptions.choices, default=StatusOptions.Active)
     image = models.ImageField(upload_to="images/products", null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)

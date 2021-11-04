@@ -56,6 +56,17 @@ class SearchProducts(LoginRequiredMixin, View):
         context['search'] = 'yes'
         return render(request, 'product/list.html', context)
 
+class productDetails(LoginRequiredMixin, View):
+    def get(self, request, id):
+        product = get_object_or_404(Product, pk=id)
+        category = get_object_or_404(Category, pk=product.category.id)
+
+        context = {'title': product.name+' - Products', 'page_title': product.name+' - Products', 'p_type': product.name}
+        context['product'] = product
+        context['category'] = category
+        return render(request, 'product/details.html', context)
+
+
 class AddView(LoginRequiredMixin, View):
     def get(self, request):
         context = {'title': 'Add Product', 'page_title': 'Add Product'}

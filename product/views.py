@@ -3,15 +3,18 @@ from product.form import ProductForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.contrib import messages
-from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-import product
 from product.models import Category, Product
+from django.core.paginator import Paginator
 
 class Products(LoginRequiredMixin, View):
     def get(self, request):
-        context = {'title': 'Products', 'page_title': 'Products' }
-        context['products'] = Product.objects.filter(status='active').order_by('-id')[:50]
+        products = Product.objects.filter(status='active').order_by('-id')
+        paginator = Paginator(products, 5)
+        page_number = request.GET.get('page')
+        productObj = paginator.get_page(page_number)
+
+        context = {'title': 'Products', 'page_title': 'Products', 'products': productObj }
         return render(request, 'product/list.html', context)
 
 class TaggedProducts(LoginRequiredMixin, View):

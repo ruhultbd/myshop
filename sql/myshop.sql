@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 03, 2021 at 12:01 PM
+-- Generation Time: Nov 04, 2021 at 09:50 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -20,6 +20,70 @@ SET time_zone = "+00:00";
 --
 -- Database: `myshop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_interface_theme`
+--
+
+CREATE TABLE `admin_interface_theme` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `title_visible` tinyint(1) NOT NULL,
+  `logo` varchar(100) NOT NULL,
+  `logo_visible` tinyint(1) NOT NULL,
+  `css_header_background_color` varchar(10) NOT NULL,
+  `title_color` varchar(10) NOT NULL,
+  `css_header_text_color` varchar(10) NOT NULL,
+  `css_header_link_color` varchar(10) NOT NULL,
+  `css_header_link_hover_color` varchar(10) NOT NULL,
+  `css_module_background_color` varchar(10) NOT NULL,
+  `css_module_text_color` varchar(10) NOT NULL,
+  `css_module_link_color` varchar(10) NOT NULL,
+  `css_module_link_hover_color` varchar(10) NOT NULL,
+  `css_module_rounded_corners` tinyint(1) NOT NULL,
+  `css_generic_link_color` varchar(10) NOT NULL,
+  `css_generic_link_hover_color` varchar(10) NOT NULL,
+  `css_save_button_background_color` varchar(10) NOT NULL,
+  `css_save_button_background_hover_color` varchar(10) NOT NULL,
+  `css_save_button_text_color` varchar(10) NOT NULL,
+  `css_delete_button_background_color` varchar(10) NOT NULL,
+  `css_delete_button_background_hover_color` varchar(10) NOT NULL,
+  `css_delete_button_text_color` varchar(10) NOT NULL,
+  `css` longtext NOT NULL,
+  `list_filter_dropdown` tinyint(1) NOT NULL,
+  `related_modal_active` tinyint(1) NOT NULL,
+  `related_modal_background_color` varchar(10) NOT NULL,
+  `related_modal_rounded_corners` tinyint(1) NOT NULL,
+  `logo_color` varchar(10) NOT NULL,
+  `recent_actions_visible` tinyint(1) NOT NULL,
+  `favicon` varchar(100) NOT NULL,
+  `related_modal_background_opacity` varchar(5) NOT NULL,
+  `env_name` varchar(50) NOT NULL,
+  `env_visible_in_header` tinyint(1) NOT NULL,
+  `env_color` varchar(10) NOT NULL,
+  `env_visible_in_favicon` tinyint(1) NOT NULL,
+  `related_modal_close_button_visible` tinyint(1) NOT NULL,
+  `language_chooser_active` tinyint(1) NOT NULL,
+  `language_chooser_display` varchar(10) NOT NULL,
+  `list_filter_sticky` tinyint(1) NOT NULL,
+  `form_pagination_sticky` tinyint(1) NOT NULL,
+  `form_submit_sticky` tinyint(1) NOT NULL,
+  `css_module_background_selected_color` varchar(10) NOT NULL,
+  `css_module_link_selected_color` varchar(10) NOT NULL,
+  `logo_max_height` smallint(5) UNSIGNED NOT NULL CHECK (`logo_max_height` >= 0),
+  `logo_max_width` smallint(5) UNSIGNED NOT NULL CHECK (`logo_max_width` >= 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin_interface_theme`
+--
+
+INSERT INTO `admin_interface_theme` (`id`, `name`, `active`, `title`, `title_visible`, `logo`, `logo_visible`, `css_header_background_color`, `title_color`, `css_header_text_color`, `css_header_link_color`, `css_header_link_hover_color`, `css_module_background_color`, `css_module_text_color`, `css_module_link_color`, `css_module_link_hover_color`, `css_module_rounded_corners`, `css_generic_link_color`, `css_generic_link_hover_color`, `css_save_button_background_color`, `css_save_button_background_hover_color`, `css_save_button_text_color`, `css_delete_button_background_color`, `css_delete_button_background_hover_color`, `css_delete_button_text_color`, `css`, `list_filter_dropdown`, `related_modal_active`, `related_modal_background_color`, `related_modal_rounded_corners`, `logo_color`, `recent_actions_visible`, `favicon`, `related_modal_background_opacity`, `env_name`, `env_visible_in_header`, `env_color`, `env_visible_in_favicon`, `related_modal_close_button_visible`, `language_chooser_active`, `language_chooser_display`, `list_filter_sticky`, `form_pagination_sticky`, `form_submit_sticky`, `css_module_background_selected_color`, `css_module_link_selected_color`, `logo_max_height`, `logo_max_width`) VALUES
+(1, 'Django', 1, 'Django administration', 1, '', 1, '#0C4B33', '#F5DD5D', '#44B78B', '#FFFFFF', '#C9F0DD', '#44B78B', '#FFFFFF', '#FFFFFF', '#C9F0DD', 1, '#0C3C26', '#156641', '#0C4B33', '#0C3C26', '#FFFFFF', '#BA2121', '#A41515', '#FFFFFF', '', 1, 1, '#000000', 1, '#FFFFFF', 1, '', '0.3', '', 1, '#E74C3C', 1, 1, 1, 'code', 1, 0, 0, '#FFFFCC', '#FFFFFF', 100, 400);
 
 -- --------------------------------------------------------
 
@@ -97,7 +161,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (33, 'Can add banner', 9, 'add_banner'),
 (34, 'Can change banner', 9, 'change_banner'),
 (35, 'Can delete banner', 9, 'delete_banner'),
-(36, 'Can view banner', 9, 'view_banner');
+(36, 'Can view banner', 9, 'view_banner'),
+(37, 'Can add Theme', 10, 'add_theme'),
+(38, 'Can change Theme', 10, 'change_theme'),
+(39, 'Can delete Theme', 10, 'delete_theme'),
+(40, 'Can view Theme', 10, 'view_theme');
 
 -- --------------------------------------------------------
 
@@ -184,7 +252,28 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (9, '2021-11-03 10:56:10.414332', '2', 'Banner object (2)', 1, '[{\"added\": {}}]', 9, 1),
 (10, '2021-11-03 10:57:20.231973', '3', 'Banner object (3)', 1, '[{\"added\": {}}]', 9, 1),
 (11, '2021-11-03 10:58:06.916555', '4', 'Banner object (4)', 1, '[{\"added\": {}}]', 9, 1),
-(12, '2021-11-03 10:58:47.462524', '5', 'Banner object (5)', 1, '[{\"added\": {}}]', 9, 1);
+(12, '2021-11-03 10:58:47.462524', '5', 'Banner object (5)', 1, '[{\"added\": {}}]', 9, 1),
+(13, '2021-11-04 03:34:00.261972', '2', 'Product object (2)', 2, '[{\"changed\": {\"fields\": [\"Tag\"]}}]', 8, 1),
+(14, '2021-11-04 03:34:07.329501', '1', 'Product object (1)', 2, '[{\"changed\": {\"fields\": [\"Tag\"]}}]', 8, 1),
+(15, '2021-11-04 03:39:07.265566', '2', 'Product object (2)', 2, '[{\"changed\": {\"fields\": [\"Name\", \"Short desc\", \"Long desc\", \"Sku\", \"Image\"]}}]', 8, 1),
+(16, '2021-11-04 03:40:07.221075', '1', 'Product object (1)', 2, '[{\"changed\": {\"fields\": [\"Name\", \"Category\", \"Short desc\", \"Long desc\", \"Image\"]}}]', 8, 1),
+(17, '2021-11-04 03:48:49.246016', '3', 'Product object (3)', 1, '[{\"added\": {}}]', 8, 1),
+(18, '2021-11-04 03:49:24.316022', '4', 'Product object (4)', 1, '[{\"added\": {}}]', 8, 1),
+(19, '2021-11-04 03:50:04.149045', '5', 'Product object (5)', 1, '[{\"added\": {}}]', 8, 1),
+(20, '2021-11-04 04:58:35.125831', '5', 'Product object (5)', 2, '[{\"changed\": {\"fields\": [\"Image2\"]}}]', 8, 1),
+(21, '2021-11-04 04:59:20.105931', '1', 'Product object (1)', 2, '[{\"changed\": {\"fields\": [\"Image2\"]}}]', 8, 1),
+(22, '2021-11-04 04:59:28.591890', '3', 'Product object (3)', 2, '[{\"changed\": {\"fields\": [\"Image2\"]}}]', 8, 1),
+(23, '2021-11-04 04:59:36.428204', '2', 'Product object (2)', 2, '[{\"changed\": {\"fields\": [\"Image2\"]}}]', 8, 1),
+(24, '2021-11-04 04:59:51.330540', '4', 'Product object (4)', 2, '[{\"changed\": {\"fields\": [\"Image2\"]}}]', 8, 1),
+(25, '2021-11-04 08:17:34.059132', '3', 'Fashion', 2, '[{\"changed\": {\"fields\": [\"Name\"]}}]', 7, 1),
+(26, '2021-11-04 08:38:22.739493', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Name\", \"Name\"]}}]', 10, 1),
+(27, '2021-11-04 08:38:53.652320', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Title\"]}}]', 10, 1),
+(28, '2021-11-04 08:39:06.360292', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Sticky submit\", \"Sticky pagination\"]}}]', 10, 1),
+(29, '2021-11-04 08:39:34.353413', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Sticky submit\", \"Sticky pagination\"]}}]', 10, 1),
+(30, '2021-11-04 08:42:58.681475', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Active\"]}}]', 10, 1),
+(31, '2021-11-04 08:43:04.193629', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Active\"]}}]', 10, 1),
+(32, '2021-11-04 08:43:34.410259', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Text color\", \"Background color\"]}}]', 10, 1),
+(33, '2021-11-04 08:43:59.980522', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Text color\"]}}]', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -204,6 +293,7 @@ CREATE TABLE `django_content_type` (
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (1, 'admin', 'logentry'),
+(10, 'admin_interface', 'theme'),
 (3, 'auth', 'group'),
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
@@ -253,7 +343,32 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (20, 'sessions', '0001_initial', '2021-11-02 03:29:21.751048'),
 (21, 'product', '0003_product', '2021-11-03 02:25:47.374240'),
 (22, 'product', '0004_product_image', '2021-11-03 02:45:24.287901'),
-(23, 'home', '0001_initial', '2021-11-03 10:52:07.206316');
+(23, 'home', '0001_initial', '2021-11-03 10:52:07.206316'),
+(24, 'product', '0005_product_tag', '2021-11-04 02:19:23.444655'),
+(25, 'product', '0006_alter_product_tag', '2021-11-04 02:53:26.206223'),
+(26, 'product', '0007_product_image2', '2021-11-04 04:57:59.553462'),
+(49, 'admin_interface', '0001_initial', '2021-11-04 08:46:33.877885'),
+(50, 'admin_interface', '0002_add_related_modal', '2021-11-04 08:46:33.971387'),
+(51, 'admin_interface', '0003_add_logo_color', '2021-11-04 08:46:34.007311'),
+(52, 'admin_interface', '0004_rename_title_color', '2021-11-04 08:46:34.027579'),
+(53, 'admin_interface', '0005_add_recent_actions_visible', '2021-11-04 08:46:34.058074'),
+(54, 'admin_interface', '0006_bytes_to_str', '2021-11-04 08:46:34.135738'),
+(55, 'admin_interface', '0007_add_favicon', '2021-11-04 08:46:34.149891'),
+(56, 'admin_interface', '0008_change_related_modal_background_opacity_type', '2021-11-04 08:46:34.192923'),
+(57, 'admin_interface', '0009_add_enviroment', '2021-11-04 08:46:34.245002'),
+(58, 'admin_interface', '0010_add_localization', '2021-11-04 08:46:34.279058'),
+(59, 'admin_interface', '0011_add_environment_options', '2021-11-04 08:46:34.330294'),
+(60, 'admin_interface', '0012_update_verbose_names', '2021-11-04 08:46:34.350474'),
+(61, 'admin_interface', '0013_add_related_modal_close_button', '2021-11-04 08:46:34.372455'),
+(62, 'admin_interface', '0014_name_unique', '2021-11-04 08:46:34.396631'),
+(63, 'admin_interface', '0015_add_language_chooser_active', '2021-11-04 08:46:34.424999'),
+(64, 'admin_interface', '0016_add_language_chooser_display', '2021-11-04 08:46:34.458222'),
+(65, 'admin_interface', '0017_change_list_filter_dropdown', '2021-11-04 08:46:34.471712'),
+(66, 'admin_interface', '0018_theme_list_filter_sticky', '2021-11-04 08:46:34.500344'),
+(67, 'admin_interface', '0019_add_form_sticky', '2021-11-04 08:46:34.553280'),
+(68, 'admin_interface', '0020_module_selected_colors', '2021-11-04 08:46:34.636251'),
+(69, 'admin_interface', '0021_file_extension_validator', '2021-11-04 08:46:34.646790'),
+(70, 'admin_interface', '0022_add_logo_max_width_and_height', '2021-11-04 08:46:34.690333');
 
 -- --------------------------------------------------------
 
@@ -324,7 +439,7 @@ CREATE TABLE `product_category` (
 
 INSERT INTO `product_category` (`id`, `name`, `status`, `created_at`, `updated_at`, `parent`) VALUES
 (1, 'Grocery', 'Active', '2021-11-02 03:32:11.621131', '2021-11-02 03:32:11.621168', 0),
-(3, 'fashion', 'Active', '2021-11-03 02:44:22.229109', '2021-11-03 02:44:22.229138', 0);
+(3, 'Fashion', 'Active', '2021-11-04 08:17:34.058107', '2021-11-04 08:17:34.058114', 0);
 
 -- --------------------------------------------------------
 
@@ -345,20 +460,32 @@ CREATE TABLE `product_product` (
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
   `category_id` bigint(20) DEFAULT NULL,
-  `image` varchar(100) DEFAULT NULL
+  `image` varchar(100) DEFAULT NULL,
+  `tag` varchar(50) DEFAULT NULL,
+  `image2` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product_product`
 --
 
-INSERT INTO `product_product` (`id`, `name`, `slug`, `short_desc`, `long_desc`, `price`, `quantity`, `sku`, `status`, `created_at`, `updated_at`, `category_id`, `image`) VALUES
-(1, '3 idots', '3-idots', '3 idots', '3 idots 3 idots', 500, 100, '3-idots', 'active', '2021-11-03 02:47:32.345443', '2021-11-03 02:47:32.345471', 1, 'images/products/3.jpg'),
-(2, 'Half Girlfriend', 'Half-Girlfriend', 'Half Girlfriend', 'Half Girlfriend', 200, 300, 'sku32', 'inactive', '2021-11-03 03:49:50.254517', '2021-11-03 03:49:50.254544', 3, 'images/products/74978909.jpg');
+INSERT INTO `product_product` (`id`, `name`, `slug`, `short_desc`, `long_desc`, `price`, `quantity`, `sku`, `status`, `created_at`, `updated_at`, `category_id`, `image`, `tag`, `image2`) VALUES
+(1, 'Dress with a belt', 'dress-with-a-belt', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 500, 100, '3-idots', 'active', '2021-11-04 04:59:20.104943', '2021-11-04 04:59:20.104951', 3, 'images/products/product-2-1_s2M04OX.jpg', 'Trending', 'images/products/product-2-2.jpg'),
+(2, 'Tie-detail top', 'tie-detail-top', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 200, 300, 'sku', 'inactive', '2021-11-04 04:59:36.426216', '2021-11-04 04:59:36.426230', 3, 'images/products/product-1-1.jpg', 'Trending', 'images/products/product-1-2.jpg'),
+(3, 'Linen-blend paper bag trousers', 'linen-blend-paper-bag-trousers', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 60, 500, 'Linen-blend paper bag trousers', 'active', '2021-11-04 04:59:28.589186', '2021-11-04 04:59:28.589203', 3, 'images/products/product-3-1.jpg', 'Trending', 'images/products/product-3-2.jpg'),
+(4, 'Paper straw shopper', 'paper-straw-shopper', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 100, 120, 'sku-2', 'active', '2021-11-04 04:59:51.329504', '2021-11-04 04:59:51.329511', 3, 'images/products/product-4-1.jpg', 'Trending', 'images/products/product-4-2.jpg'),
+(5, 'Long-sleeved blouse', 'long-sleeved-blouse', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 75, 1200, 'sku-5', 'active', '2021-11-04 04:58:35.124651', '2021-11-04 04:58:35.124659', 3, 'images/products/product-5-1.jpg', 'Trending', 'images/products/product-5-2.jpg');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_interface_theme`
+--
+ALTER TABLE `admin_interface_theme`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`);
 
 --
 -- Indexes for table `auth_group`
@@ -458,6 +585,12 @@ ALTER TABLE `product_product`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_interface_theme`
+--
+ALTER TABLE `admin_interface_theme`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `auth_group`
 --
 ALTER TABLE `auth_group`
@@ -473,7 +606,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -497,19 +630,19 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `home_banner`
@@ -527,7 +660,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_product`
 --
 ALTER TABLE `product_product`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

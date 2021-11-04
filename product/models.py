@@ -44,6 +44,7 @@ class Product(models.Model):
     tag = models.CharField(null=True, max_length=50, choices=TagOptions.choices)
     status = models.CharField(max_length=10, choices=StatusOptions.choices, default=StatusOptions.Active)
     image = models.ImageField(upload_to="images/products", null=True)
+    image2 = models.ImageField(upload_to="images/products", null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
 

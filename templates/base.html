@@ -65,10 +65,10 @@
                             <li>
                                 <a href="#">Links</a>
                                 <ul>
-                                    <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                                    <li><a href="wishlist.html"><i class="icon-heart-o"></i>My Wishlist <span>(3)</span></a></li>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="javascript:void(0)"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
+<!--                                    <li><a href="wishlist.html"><i class="icon-heart-o"></i>My Wishlist <span>(3)</span></a></li>-->
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Contact Us</a></li>
                                     <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
                                 </ul>
                             </li>
@@ -103,20 +103,15 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="product.html">New Arrival</a>
+                                    <a href="{% url 'products.tag' 'Trending' %}" >Trending</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'products.tag' 'New Arrival' %}" >New Arrival</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'products.tag' 'On Sale' %}" >On Sale</a>
                                 </li>
 
-                                <li>
-                                    <a href="product.html">Trending </a>
-                                </li>
-
-                                <li>
-                                    <a href="product.html">Feature</a>
-                                </li>
-
-                                <li>
-                                    <a href="product.html">On Sale</a>
-                                </li>
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->
                     </div><!-- End .header-left -->
@@ -124,7 +119,7 @@
                     <div class="header-right">
                         <div class="header-search header-search-extended header-search-visible">
                             <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                            <form action="#" method="get">
+                            <form action="{% url 'products.search' %}" method="get">
                                 <div class="header-search-wrapper search-wrapper-wide">
                                     <label for="q" class="sr-only">Search</label>
                                     <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
@@ -264,101 +259,9 @@
         </main>
 
         <footer class="footer footer-2">
-            <div class="footer-middle">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-4">
-                            <div class="widget widget-about">
-                                <img src="{% static 'assets/images/demos/demo-7/logo-footer.png' %}" class="footer-logo" alt="Footer Logo" width="105" height="25">
-                                <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
-                                
-                                <div class="widget-about-info">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-4">
-                                            <span class="widget-about-title">Got Question? Call us 24/7</span>
-                                            <a href="tel:123456789">+0123 456 789</a>
-                                        </div><!-- End .col-sm-6 -->
-                                        <div class="col-sm-6 col-md-8">
-                                            <span class="widget-about-title">Payment Method</span>
-                                            <figure class="footer-payments">
-                                                <img src="{% static 'assets/images/payments.png' %}" alt="Payment methods" width="272" height="20">
-                                            </figure><!-- End .footer-payments -->
-                                        </div><!-- End .col-sm-6 -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .widget-about-info -->
-                            </div><!-- End .widget about-widget -->
-                        </div><!-- End .col-sm-12 col-lg-4 -->
-
-                        <div class="col-sm-4 col-lg-2">
-                            <div class="widget">
-                                <h4 class="widget-title">Useful links</h4><!-- End .widget-title -->
-
-                                <ul class="widget-list">
-                                    <li><a href="about.html">About Molla</a></li>
-                                    <li><a href="#">How to shop on Molla</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                    <li><a href="login.html">Log in</a></li>
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-4 col-lg-2 -->
-
-                        <div class="col-sm-4 col-lg-2">
-                            <div class="widget">
-                                <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
-
-                                <ul class="widget-list">
-                                    <li><a href="#">Payment Methods</a></li>
-                                    <li><a href="#">Money-back guarantee!</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Shipping</a></li>
-                                    <li><a href="#">Terms and conditions</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-4 col-lg-2 -->
-
-                        <div class="col-sm-4 col-lg-2">
-                            <div class="widget">
-                                <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
-
-                                <ul class="widget-list">
-                                    <li><a href="#">Sign In</a></li>
-                                    <li><a href="cart.html">View Cart</a></li>
-                                    <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">Track My Order</a></li>
-                                    <li><a href="#">Help</a></li>
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-4 col-lg-2 -->
-
-                        <div class="col-sm-6 col-lg-2">
-                            <div class="widget widget-newsletter">
-                                <h4 class="widget-title">Sign up to newsletter</h4><!-- End .widget-title -->
-
-                                <p>Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan.</p>
-                                
-                                <form action="#">
-                                    <div class="input-group">
-                                        <input type="email" class="form-control" placeholder="Enter your Email Address" aria-label="Email Adress" required>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-dark" type="submit"><i class="icon-long-arrow-right"></i></button>
-                                        </div><!-- .End .input-group-append -->
-                                    </div><!-- .End .input-group -->
-                                </form>
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-6 col-lg-2 -->
-                    </div><!-- End .row -->
-                </div><!-- End .container-fluid -->
-            </div><!-- End .footer-middle -->
-
             <div class="footer-bottom">
                 <div class="container-fluid">
                     <p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p><!-- End .footer-copyright -->
-                    <ul class="footer-menu">
-                        <li><a href="#">Terms Of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul><!-- End .footer-menu -->
 
                     <div class="social-icons social-icons-color">
                         <span class="social-label">Social Media</span>

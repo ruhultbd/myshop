@@ -26,7 +26,7 @@ class TaggedProducts(LoginRequiredMixin, View):
         page_number = request.GET.get('page')
         productObj = paginator.get_page(page_number)
 
-        context = {'title': tag+' Products', 'page_title': tag+' Products', 'p_type': tag }
+        context = {'title': tag+' Products', 'page_title': tag+' - Products', 'p_type': tag }
         context['products'] = productObj
         return render(request, 'product/list.html', context)
 
@@ -41,6 +41,19 @@ class CategoryProducts(LoginRequiredMixin, View):
         context = {'title': category.name+' - Products', 'page_title': category.name+' - Products', 'p_type': category.name}
         context['products'] = productObj
         context['categoryInfo'] = category
+        return render(request, 'product/list.html', context)
+
+class SearchProducts(LoginRequiredMixin, View):
+    def get(self, request):
+        searchKey = request.GET.get('q')
+        products = Product.objects.filter(name__contains=searchKey).order_by('-id')
+        paginator = Paginator(products, productLimit)
+        page_number = request.GET.get('page')
+        productObj = paginator.get_page(page_number)
+
+        context = {'title': 'Search Result - Products', 'page_title': 'Search Result for <i>'+searchKey+'</i>', 'p_type': 'Search Result'}
+        context['products'] = productObj
+        context['search'] = 'yes'
         return render(request, 'product/list.html', context)
 
 class AddView(LoginRequiredMixin, View):

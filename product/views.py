@@ -7,10 +7,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from product.models import Category, Product
 from django.core.paginator import Paginator
 
+productLimit = 5
+
 class Products(LoginRequiredMixin, View):
     def get(self, request):
         products = Product.objects.filter(status='active').order_by('-id')
-        paginator = Paginator(products, 5)
+        paginator = Paginator(products, productLimit)
         page_number = request.GET.get('page')
         productObj = paginator.get_page(page_number)
 
@@ -19,14 +21,27 @@ class Products(LoginRequiredMixin, View):
 
 class TaggedProducts(LoginRequiredMixin, View):
     def get(self, request, tag):
+        products = Product.objects.filter(tag='Trending').order_by('-id')
+        paginator = Paginator(products, productLimit)
+        page_number = request.GET.get('page')
+        productObj = paginator.get_page(page_number)
+
         context = {'title': tag+' Products', 'page_title': tag+' Products', 'p_type': tag }
-        context['products'] = Product.objects.filter(tag='Trending').order_by('-id')[:50]
+        context['products'] = productObj
         return render(request, 'product/list.html', context)
 
-class ListView(LoginRequiredMixin, View):
-    def get(self, request):
-        context = {'title': 'Products', 'page_title': 'Product List'}
-        return render(request, 'product/index.html', context)
+class CategoryProducts(LoginRequiredMixin, View):
+    def get(self, request, id):
+        products = Product.objects.filter(category_id=id).order_by('-id')
+        paginator = Paginator(products, productLimit)
+        page_number = request.GET.get('page')
+        productObj = paginator.get_page(page_number)
+
+        category = get_object_or_404(Category, pk=id)
+        context = {'title': category.name+' - Products', 'page_title': category.name+' - Products', 'p_type': category.name}
+        context['products'] = productObj
+        context['categoryInfo'] = category
+        return render(request, 'product/list.html', context)
 
 class AddView(LoginRequiredMixin, View):
     def get(self, request):

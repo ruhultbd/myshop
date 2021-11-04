@@ -24,9 +24,9 @@
 
             <div class="page-content">
                 <div class="container">
-        			<div class="toolbox">
+        			<div class="toolbox d-none">
                         <div class="toolbox-center">
-                            <div class="toolbox-info d-none">
+                            <div class="toolbox-info">
                                 Showing <span>{{products.paginator.per_page}} of {{products.paginator.num_pages}}</span> Products
                             </div><!-- End .toolbox-info -->
                         </div><!-- End .toolbox-center -->
@@ -83,7 +83,7 @@
 
                         </div><!-- End .row -->
 
-                        {% if products %}
+                        {% if products.number != products.paginator.num_pages %}
                         <div class="load-more-container d-flex justify-content-center">
 <!--                            <a href="#" class="btn btn-outline-darker btn-load-more">More Products <i class="icon-refresh"></i></a>-->
                             <nav aria-label="Page navigation">

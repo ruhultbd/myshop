@@ -32,6 +32,15 @@
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/skins/skin-demo-7.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/demos/demo-7.css' %}">
+
+    <style>
+        .title-border-bottom{
+            border-bottom: 1px solid #ebebeb;
+            padding-bottom: 5px;
+            border-width: 50pxl;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -76,14 +85,14 @@
                             <i class="icon-bars"></i>
                         </button>
                         
-                        <a href="index.html" class="logo">
+                        <a href="{% url 'home' %}" class="logo">
                             <img src="{% static 'assets/images/demos/demo-7/logo.png' %}" alt="Molla Logo" width="105" height="25">
                         </a>
 
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li class="active">
-                                    <a href="index.html">Home</a>
+                                    <a href="{% url 'home' %}">Home</a>
                                 </li>
                                 <li>
                                     <a href="elements-list.html" class="sf-with-ul">Categories</a>

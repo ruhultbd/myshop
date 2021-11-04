@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import ListView, AddView, CategoryListView, CategoryEditView, CategoryDeleteView
+from .views import Products, TaggedProducts, AddView, CategoryListView, CategoryEditView, CategoryDeleteView
 
 from . import views
 
 urlpatterns = [
-    path('', ListView.as_view(), name="products"),
+    path('', Products.as_view(), name="products"),
+    path('tag/<str:tag>', TaggedProducts.as_view(), name="products.tag"),
     path('create', AddView.as_view(), name="product.add"),
 
     path('categories', CategoryListView.as_view(), name="product-categories"),

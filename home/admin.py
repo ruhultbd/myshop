@@ -10,7 +10,6 @@ class BannerAdmin(admin.ModelAdmin):
     def link_tag(self, obj):
         return format_html('<a href="{}">Link<a/>'.format(obj.link))
 
-
     list_display = ['ordering', 'image_tag', 'title_1', 'title_2', 'link_tag', 'status', 'updated_at']
     search_fields = ['title_1', 'title_2', 'status']
     list_filter = ['status', 'created_at']

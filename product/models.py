@@ -26,6 +26,7 @@ class Product(models.Model):
         Inactive = 'inactive'
 
     class TagOptions(models.TextChoices):
+        Trending = 'Trending'
         Featured = 'Featured'
         New_Arrival = 'New Arrival'
         Top_Rated = 'Top Rated'

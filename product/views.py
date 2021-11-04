@@ -6,8 +6,19 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 import product
-from product.models import Category
+from product.models import Category, Product
 
+class Products(LoginRequiredMixin, View):
+    def get(self, request):
+        context = {'title': 'Products', 'page_title': 'Products' }
+        context['products'] = Product.objects.filter(status='active').order_by('-id')[:50]
+        return render(request, 'product/list.html', context)
+
+class TaggedProducts(LoginRequiredMixin, View):
+    def get(self, request, tag):
+        context = {'title': tag+' Products', 'page_title': tag+' Products', 'p_type': tag }
+        context['products'] = Product.objects.filter(tag='Trending').order_by('-id')[:50]
+        return render(request, 'product/list.html', context)
 
 class ListView(LoginRequiredMixin, View):
     def get(self, request):

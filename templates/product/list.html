@@ -2,14 +2,14 @@
 {% load static %}
 {% block content %}
      <main class="main">
-        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        	<div class="page-header text-center" style="background-image: url({% static 'assets/images/page-header-bg.jpg' %})">
         		<div class="container">
         			<h1 class="page-title">{{page_title|safe}}</h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
                 <div class="container">
-                    <ol class="breadcrumb">
+                    <ol class="breadcrumb col-lg-8 col-md-10 col-sm-12 m-auto">
 
                         <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
                         {% if p_type %}
@@ -45,7 +45,7 @@
         				</div><!-- End .toolbox-right -->
         			</div><!-- End .toolbox -->
 
-                    <div class="products">
+                    <div class="products col-lg-8 col-md-10 col-sm-12 pl-0 pr-0 m-auto">
                         <div class="row justify-content-center">
                             {% if products %}
                                 {% for item in products %}

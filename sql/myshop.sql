@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 04, 2021 at 09:50 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.24
+-- Host: 127.0.0.1
+-- Generation Time: Nov 04, 2021 at 05:53 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -165,7 +165,15 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (37, 'Can add Theme', 10, 'add_theme'),
 (38, 'Can change Theme', 10, 'change_theme'),
 (39, 'Can delete Theme', 10, 'delete_theme'),
-(40, 'Can view Theme', 10, 'view_theme');
+(40, 'Can view Theme', 10, 'view_theme'),
+(41, 'Can add brand', 11, 'add_brand'),
+(42, 'Can change brand', 11, 'change_brand'),
+(43, 'Can delete brand', 11, 'delete_brand'),
+(44, 'Can view brand', 11, 'view_brand'),
+(45, 'Can add testimonial', 12, 'add_testimonial'),
+(46, 'Can change testimonial', 12, 'change_testimonial'),
+(47, 'Can delete testimonial', 12, 'delete_testimonial'),
+(48, 'Can view testimonial', 12, 'view_testimonial');
 
 -- --------------------------------------------------------
 
@@ -192,7 +200,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$260000$gePEvPk5Z2dUiElbiS4ciT$vleIiFVfL4G1FZRZiTF5PXwkN9ZK7/uvvyCi29j4nro=', '2021-11-02 03:30:24.090307', 1, 'ruhul', '', '', 'ruhul@tbd.com', 1, 1, '2021-11-02 03:29:57.811429'),
+(1, 'pbkdf2_sha256$260000$gePEvPk5Z2dUiElbiS4ciT$vleIiFVfL4G1FZRZiTF5PXwkN9ZK7/uvvyCi29j4nro=', '2021-11-04 14:57:27.334545', 1, 'ruhul', '', '', 'ruhul@tbd.com', 1, 1, '2021-11-02 03:29:57.811429'),
 (2, 'pbkdf2_sha256$260000$hOXRcQEA1ppMLaVsYqoxqb$20RaNccg6DvzYhOwHP5zA1gjcmRLRCTgT1LfDYXGc4Y=', NULL, 0, 'shahad', '', '', '', 0, 1, '2021-11-02 03:31:02.079781');
 
 -- --------------------------------------------------------
@@ -273,7 +281,25 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (30, '2021-11-04 08:42:58.681475', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Active\"]}}]', 10, 1),
 (31, '2021-11-04 08:43:04.193629', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Active\"]}}]', 10, 1),
 (32, '2021-11-04 08:43:34.410259', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Text color\", \"Background color\"]}}]', 10, 1),
-(33, '2021-11-04 08:43:59.980522', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Text color\"]}}]', 10, 1);
+(33, '2021-11-04 08:43:59.980522', '1', 'My Shop', 2, '[{\"changed\": {\"fields\": [\"Text color\"]}}]', 10, 1),
+(34, '2021-11-04 15:35:14.022347', '5', 'Product object (5)', 2, '[{\"changed\": {\"fields\": [\"Long desc\"]}}]', 8, 1),
+(35, '2021-11-04 15:35:44.142141', '5', 'Product object (5)', 2, '[{\"changed\": {\"fields\": [\"Long desc\"]}}]', 8, 1),
+(36, '2021-11-04 15:36:14.110454', '5', 'Product object (5)', 2, '[{\"changed\": {\"fields\": [\"Long desc\"]}}]', 8, 1),
+(37, '2021-11-04 15:37:00.204866', '5', 'Product object (5)', 2, '[{\"changed\": {\"fields\": [\"Long desc\"]}}]', 8, 1),
+(38, '2021-11-04 15:37:23.483979', '4', 'Product object (4)', 2, '[{\"changed\": {\"fields\": [\"Long desc\"]}}]', 8, 1),
+(39, '2021-11-04 15:45:53.522686', '1', 'Brand object (1)', 1, '[{\"added\": {}}]', 11, 1),
+(40, '2021-11-04 15:46:09.484785', '2', 'Brand object (2)', 1, '[{\"added\": {}}]', 11, 1),
+(41, '2021-11-04 15:46:23.514041', '3', 'Brand object (3)', 1, '[{\"added\": {}}]', 11, 1),
+(42, '2021-11-04 15:46:36.626704', '4', 'Brand object (4)', 1, '[{\"added\": {}}]', 11, 1),
+(43, '2021-11-04 15:46:51.787572', '5', 'Brand object (5)', 1, '[{\"added\": {}}]', 11, 1),
+(44, '2021-11-04 15:47:05.939574', '6', 'Brand object (6)', 1, '[{\"added\": {}}]', 11, 1),
+(45, '2021-11-04 15:47:16.522556', '7', 'Brand object (7)', 1, '[{\"added\": {}}]', 11, 1),
+(46, '2021-11-04 15:47:27.874570', '8', 'Brand object (8)', 1, '[{\"added\": {}}]', 11, 1),
+(47, '2021-11-04 15:47:45.730764', '9', 'Brand object (9)', 1, '[{\"added\": {}}]', 11, 1),
+(48, '2021-11-04 16:08:24.673066', '1', 'Testimonial object (1)', 1, '[{\"added\": {}}]', 12, 1),
+(49, '2021-11-04 16:08:58.246055', '2', 'Testimonial object (2)', 1, '[{\"added\": {}}]', 12, 1),
+(50, '2021-11-04 16:09:30.648039', '3', 'Testimonial object (3)', 1, '[{\"added\": {}}]', 12, 1),
+(51, '2021-11-04 16:42:38.099289', '2', 'Product object (2)', 2, '[{\"changed\": {\"fields\": [\"Status\"]}}]', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -299,6 +325,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
 (9, 'home', 'banner'),
+(11, 'home', 'brand'),
+(12, 'home', 'testimonial'),
 (7, 'product', 'category'),
 (8, 'product', 'product'),
 (6, 'sessions', 'session');
@@ -368,7 +396,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (67, 'admin_interface', '0019_add_form_sticky', '2021-11-04 08:46:34.553280'),
 (68, 'admin_interface', '0020_module_selected_colors', '2021-11-04 08:46:34.636251'),
 (69, 'admin_interface', '0021_file_extension_validator', '2021-11-04 08:46:34.646790'),
-(70, 'admin_interface', '0022_add_logo_max_width_and_height', '2021-11-04 08:46:34.690333');
+(70, 'admin_interface', '0022_add_logo_max_width_and_height', '2021-11-04 08:46:34.690333'),
+(71, 'home', '0002_brand', '2021-11-04 15:42:31.823691'),
+(72, 'home', '0003_testimonial', '2021-11-04 16:07:09.790300');
 
 -- --------------------------------------------------------
 
@@ -387,7 +417,8 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('j6y8pjmue6lyxl1uusswghp2n51mhws4', '.eJxVjDkOwjAUBe_iGlnO4o2SnjNYfzMOIEeKkwpxd4iUAto3M--lEmxrSVuTJU2szqpTp98NgR5Sd8B3qLdZ01zXZUK9K_qgTV9nluflcP8OCrTyrfsowfnR-sgWvQMQGoRzoGyRUEJwfST2ETvwIobYZOJxcNa6nI1D9f4ABm45Ew:1mhkVE:HTByTdDk61BCW4PKJrJpfNVfxAgw6SZVAaAIWOcdsrs', '2021-11-16 03:30:24.093844');
+('j6y8pjmue6lyxl1uusswghp2n51mhws4', '.eJxVjDkOwjAUBe_iGlnO4o2SnjNYfzMOIEeKkwpxd4iUAto3M--lEmxrSVuTJU2szqpTp98NgR5Sd8B3qLdZ01zXZUK9K_qgTV9nluflcP8OCrTyrfsowfnR-sgWvQMQGoRzoGyRUEJwfST2ETvwIobYZOJxcNa6nI1D9f4ABm45Ew:1mhkVE:HTByTdDk61BCW4PKJrJpfNVfxAgw6SZVAaAIWOcdsrs', '2021-11-16 03:30:24.093844'),
+('v98x4fsw8b8dc10aew9qtyqh7345hxun', '.eJxVjDkOwjAUBe_iGlnO4o2SnjNYfzMOIEeKkwpxd4iUAto3M--lEmxrSVuTJU2szqpTp98NgR5Sd8B3qLdZ01zXZUK9K_qgTV9nluflcP8OCrTyrfsowfnR-sgWvQMQGoRzoGyRUEJwfST2ETvwIobYZOJxcNa6nI1D9f4ABm45Ew:1mieBD:uQbCNR_AR_7OBGZFO6ZLbKLiSGdr5UdPiUN4HTSFllw', '2021-11-18 14:57:27.337537');
 
 -- --------------------------------------------------------
 
@@ -417,6 +448,62 @@ INSERT INTO `home_banner` (`id`, `title_1`, `title_2`, `link`, `status`, `orderi
 (3, 'FLIP FLOP', 'Summer<br>sale -70% off', '#', 'active', 3, 'images/banners/banner-3.jpg', '2021-11-03 10:57:20.229599', '2021-11-03 10:57:20.229702'),
 (4, 'ACCESSORIES', '2019 Winter<br>up to 50% off', '#', 'active', 4, 'images/banners/banner-4.jpg', '2021-11-03 10:58:06.915488', '2021-11-03 10:58:06.915515'),
 (5, 'NEW IN', 'Women’s<br>sportswear', '#', 'active', 5, 'images/banners/banner-5.jpg', '2021-11-03 10:58:47.461909', '2021-11-03 10:58:47.461935');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `home_brand`
+--
+
+CREATE TABLE `home_brand` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `link` varchar(512) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `image` varchar(100) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `home_brand`
+--
+
+INSERT INTO `home_brand` (`id`, `name`, `link`, `status`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'LE BARREL', '#', 'active', 'images/banners/1.png', '2021-11-04 15:45:53.522686', '2021-11-04 15:45:53.522686'),
+(2, 'Something', '#', 'active', 'images/banners/2.png', '2021-11-04 15:46:09.482787', '2021-11-04 15:46:09.482787'),
+(3, 'Costa Brava', '#', 'active', 'images/banners/3.png', '2021-11-04 15:46:23.513068', '2021-11-04 15:46:23.513068'),
+(4, 'Oceanic', '#', 'active', 'images/banners/4.png', '2021-11-04 15:46:36.625730', '2021-11-04 15:46:36.625730'),
+(5, 'Fountain', '#', 'active', 'images/banners/5.png', '2021-11-04 15:46:51.785577', '2021-11-04 15:46:51.785577'),
+(6, 'Black Birds', '#', 'active', 'images/banners/6.png', '2021-11-04 15:47:05.938576', '2021-11-04 15:47:05.938576'),
+(7, 'Hugo', '#', 'active', 'images/banners/7.png', '2021-11-04 15:47:16.521558', '2021-11-04 15:47:16.521558'),
+(8, 'Mountain', '#', 'active', 'images/banners/8.png', '2021-11-04 15:47:27.873572', '2021-11-04 15:47:27.873572'),
+(9, 'Mr Bookers', '#', 'active', 'images/banners/9.png', '2021-11-04 15:47:45.729763', '2021-11-04 15:47:45.729763');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `home_testimonial`
+--
+
+CREATE TABLE `home_testimonial` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `Description` longtext DEFAULT NULL,
+  `name` varchar(200) NOT NULL,
+  `designation` varchar(100) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `home_testimonial`
+--
+
+INSERT INTO `home_testimonial` (`id`, `title`, `Description`, `name`, `designation`, `created_at`, `updated_at`) VALUES
+(1, 'Really great store', 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra<br>a, ultricies in, diam. Sed arcu.', 'Charly Smith', 'Customer', '2021-11-04 16:08:24.672096', '2021-11-04 16:08:24.672096'),
+(2, 'Friendly Support', 'Impedit, ratione sequi, sunt incidunt magnam et. Delectus obcaecati optio eius error libero perferendis nesciunt atque dolores magni recusandae! Doloremque quidem error eum quis similique doloribus natus qui ut ipsum.', 'Damon Stone', 'Customer', '2021-11-04 16:08:58.245066', '2021-11-04 16:08:58.245066'),
+(3, 'Free Shipping', 'Molestias animi illo natus ut quod neque ad accusamus praesentium fuga! Dolores odio alias sapiente odit delectus quasi, explicabo a, modi voluptatibus. Perferendis perspiciatis, voluptate, distinctio earum veritatis animi tempora eget blandit nunc tortor mollis', 'John Smith', 'Customer', '2021-11-04 16:09:30.646639', '2021-11-04 16:09:30.646639');
 
 -- --------------------------------------------------------
 
@@ -471,10 +558,10 @@ CREATE TABLE `product_product` (
 
 INSERT INTO `product_product` (`id`, `name`, `slug`, `short_desc`, `long_desc`, `price`, `quantity`, `sku`, `status`, `created_at`, `updated_at`, `category_id`, `image`, `tag`, `image2`) VALUES
 (1, 'Dress with a belt', 'dress-with-a-belt', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 500, 100, '3-idots', 'active', '2021-11-04 04:59:20.104943', '2021-11-04 04:59:20.104951', 3, 'images/products/product-2-1_s2M04OX.jpg', 'Trending', 'images/products/product-2-2.jpg'),
-(2, 'Tie-detail top', 'tie-detail-top', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 200, 300, 'sku', 'inactive', '2021-11-04 04:59:36.426216', '2021-11-04 04:59:36.426230', 3, 'images/products/product-1-1.jpg', 'Trending', 'images/products/product-1-2.jpg'),
+(2, 'Tie-detail top', 'tie-detail-top', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 200, 300, 'sku', 'active', '2021-11-04 16:42:38.098197', '2021-11-04 16:42:38.098197', 3, 'images/products/product-1-1.jpg', 'Trending', 'images/products/product-1-2.jpg'),
 (3, 'Linen-blend paper bag trousers', 'linen-blend-paper-bag-trousers', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 60, 500, 'Linen-blend paper bag trousers', 'active', '2021-11-04 04:59:28.589186', '2021-11-04 04:59:28.589203', 3, 'images/products/product-3-1.jpg', 'Trending', 'images/products/product-3-2.jpg'),
-(4, 'Paper straw shopper', 'paper-straw-shopper', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 100, 120, 'sku-2', 'active', '2021-11-04 04:59:51.329504', '2021-11-04 04:59:51.329511', 3, 'images/products/product-4-1.jpg', 'Trending', 'images/products/product-4-2.jpg'),
-(5, 'Long-sleeved blouse', 'long-sleeved-blouse', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 75, 1200, 'sku-5', 'active', '2021-11-04 04:58:35.124651', '2021-11-04 04:58:35.124659', 3, 'images/products/product-5-1.jpg', 'Trending', 'images/products/product-5-2.jpg');
+(4, 'Paper straw shopper', 'paper-straw-shopper', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Product Information\r\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus.\r\n\r\nNunc nec porttitor turpis. In eu risus enim. In vitae mollis elit.\r\nVivamus finibus vel mauris ut vehicula.\r\nNullam a magna porttitor, dictum risus nec, faucibus sapien.\r\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus.', 100, 120, 'sku-2', 'active', '2021-11-04 15:37:23.482982', '2021-11-04 15:37:23.482982', 3, 'images/products/product-4-1.jpg', 'Trending', 'images/products/product-4-2.jpg'),
+(5, 'Long-sleeved blouse', 'long-sleeved-blouse', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '<h3>Information</h3>\r\n                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>\r\n\r\n                                    <h3>Fabric &amp; care</h3>\r\n                                    <ul>\r\n                                        <li>Faux suede fabric</li>\r\n                                        <li>Gold tone metal hoop handles.</li>\r\n                                        <li>RI branding</li>\r\n                                        <li>Snake print trim interior </li>\r\n                                        <li>Adjustable cross body strap</li>\r\n                                        <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>\r\n                                    </ul>\r\n\r\n                                    <h3>Size</h3>\r\n                                    <p>one size</p>', 75, 1200, 'sku-5', 'active', '2021-11-04 15:37:00.203844', '2021-11-04 15:37:00.203844', 3, 'images/products/product-5-1.jpg', 'Trending', 'images/products/product-5-2.jpg');
 
 --
 -- Indexes for dumped tables
@@ -567,6 +654,18 @@ ALTER TABLE `home_banner`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `home_brand`
+--
+ALTER TABLE `home_brand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `home_testimonial`
+--
+ALTER TABLE `home_testimonial`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product_category`
 --
 ALTER TABLE `product_category`
@@ -606,7 +705,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -630,25 +729,37 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `home_banner`
 --
 ALTER TABLE `home_banner`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `home_brand`
+--
+ALTER TABLE `home_brand`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `home_testimonial`
+--
+ALTER TABLE `home_testimonial`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product_category`

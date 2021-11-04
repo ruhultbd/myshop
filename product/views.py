@@ -21,7 +21,7 @@ class Products(LoginRequiredMixin, View):
 
 class TaggedProducts(LoginRequiredMixin, View):
     def get(self, request, tag):
-        products = Product.objects.filter(tag='Trending').order_by('-id')
+        products = Product.objects.filter(tag='Trending', status='active').order_by('-id')
         paginator = Paginator(products, productLimit)
         page_number = request.GET.get('page')
         productObj = paginator.get_page(page_number)
@@ -32,7 +32,7 @@ class TaggedProducts(LoginRequiredMixin, View):
 
 class CategoryProducts(LoginRequiredMixin, View):
     def get(self, request, id):
-        products = Product.objects.filter(category_id=id).order_by('-id')
+        products = Product.objects.filter(category_id=id, status='active').order_by('-id')
         paginator = Paginator(products, productLimit)
         page_number = request.GET.get('page')
         productObj = paginator.get_page(page_number)
@@ -46,7 +46,7 @@ class CategoryProducts(LoginRequiredMixin, View):
 class SearchProducts(LoginRequiredMixin, View):
     def get(self, request):
         searchKey = request.GET.get('q')
-        products = Product.objects.filter(name__contains=searchKey).order_by('-id')
+        products = Product.objects.filter(name__contains=searchKey, status='active').order_by('-id')
         paginator = Paginator(products, productLimit)
         page_number = request.GET.get('page')
         productObj = paginator.get_page(page_number)

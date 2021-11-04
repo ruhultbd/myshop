@@ -47,10 +47,10 @@
     <div class="page-wrapper">
         <header class="header header-7">
             <div class="header-top">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="header-left">
                         <div class="header-dropdown">
-                            <a href="#">BDT</a>
+                            <a href="#">USD</a>
                             <div class="header-menu">
                                 <ul>
                                     <li><a href="#">BDT</a></li>
@@ -67,8 +67,8 @@
                                 <ul>
                                     <li><a href="javascript:void(0)"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
 <!--                                    <li><a href="wishlist.html"><i class="icon-heart-o"></i>My Wishlist <span>(3)</span></a></li>-->
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="{% url 'about-us' %}">About Us</a></li>
+                                    <li><a href="{% url 'contact-us' %}">Contact Us</a></li>
                                     <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
                                 </ul>
                             </li>
@@ -78,7 +78,7 @@
             </div><!-- End .header-top -->
 
             <div class="header-middle sticky-header">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="header-left">
                         <button class="mobile-menu-toggler">
                             <span class="sr-only">Toggle mobile menu</span>
@@ -200,6 +200,7 @@
 
             {% endblock  %}
 
+            {% if brands %}
             <div class="brands-border owl-carousel owl-simple" data-toggle="owl"
                 data-owl-options='{
                     "nav": false,
@@ -227,41 +228,22 @@
                         }
                     }
                 }'>
-                <a href="#" class="brand">
-                    <img src="{% static 'assets/images/brands/1.png' %}" alt="Brand Name">
-                </a>
 
-                <a href="#" class="brand">
-                    <img src="{% static 'assets/images/brands/2.png' %}" alt="Brand Name">
+                {% for brand in brands %}
+                <a href="{{brand.link}}" target="_blank" class="brand">
+                    <img src="{{brand.image.url}}" alt="{{brand.name}}">
                 </a>
-
-                <a href="#" class="brand">
-                    <img src="{% static 'assets/images/brands/3.png' %}" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="{% static 'assets/images/brands/4.png' %}" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="{% static 'assets/images/brands/5.png' %}" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="{% static 'assets/images/brands/6.png' %}" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="{% static 'assets/images/brands/7.png' %}" alt="Brand Name">
-                </a>
+                {% endfor %}
             </div><!-- End .owl-carousel -->
+
+            {% endif %}
 
         </main>
 
         <footer class="footer footer-2">
             <div class="footer-bottom">
                 <div class="container-fluid">
-                    <p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+                    <p class="footer-copyright">Copyright © {% now "Y" %} Molla Store. All Rights Reserved.</p><!-- End .footer-copyright -->
 
                     <div class="social-icons social-icons-color">
                         <span class="social-label">Social Media</span>
@@ -574,9 +556,16 @@
     <script src="{% static 'assets/js/jquery.plugin.min.js' %}"></script>
     <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
     <script src="{% static 'assets/js/jquery.countdown.min.js' %}"></script>
+
+    {% block 'script' %}
+
+    {% endblock %}
+
     <!-- Main JS File -->
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script src="{% static 'assets/js/demos/demo-7.js' %}"></script>
+
+
 </body>
 
 

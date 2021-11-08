@@ -129,7 +129,9 @@
                                 </div><!-- End .header-search-wrapper -->
                             </form>
                         </div><!-- End .header-search -->
-                        
+                        {% if carts %}
+
+                        {% else %}
                         <div class="cart-info-container">
                             <div class="dropdown cart-dropdown">
                                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
@@ -185,6 +187,7 @@
                             </div><!-- End .cart-dropdown -->
 
                         </div>
+                        {% endif %}
                     </div><!-- End .header-right -->
                 </div><!-- End .container-fluid -->
             </div><!-- End .header-middle -->
@@ -577,9 +580,19 @@
 
                $(document).on("click",".cart-item-remove",function(){
                     var removeUrl = $(this).attr("url");
+                    var cartPage = $(this).attr("cart_page");
+                    var element =  $(this)
+
                     $.get( removeUrl, function(data) {
                             showToaster(data.status, data.msg);
                             $('.cart-info-container').html(data.html_data);
+                            if(cartPage){
+                                element.parent().parent().remove()
+                                setTimeout(function(){
+                                    location.reload()
+                                }, 500);
+                            }
+
                        },
                        'json' // I expect a JSON response
                     );

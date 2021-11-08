@@ -71,23 +71,12 @@ class productDetails(View):
         return render(request, 'product/details.html', context)
 
 class CartsView(View):
-    def get(self, request):
+    def get(self, request, id=False):
 
-        sessionId = False
-        if 'sessionId' in request.session:
-            sessionId = request.session['sessionId']
+        if id:
+            Cart.objects.filter(id=id).delete()
 
-        cart_items = {}
-        totalItems = 0
-        totalPrice = 0
-
-        if sessionId:
-            cart_items = Cart.objects.filter(session_id=sessionId).order_by('-id')
-            totalItems = len(cart_items)
-            prices = Cart.objects.values_list('total_price', flat=True)
-            totalPrice = sum(prices)
-
-        context = {'title': 'Shopping Cart', 'page_title': 'Shopping Cart', 'total_items': totalItems, 'cart_items': cart_items, 'total_price': totalPrice}
+        context = {'carts':'yes','title': 'Shopping Cart', 'page_title': 'Shopping Cart'}
         return render(request, 'product/carts.html', context)
 
 class AddToCartView(View):
@@ -132,12 +121,14 @@ class AddToCartView(View):
                   totalPrice = float(quantity*price)
                   updateCart = Cart(id=hasCart.id,session_id=sessionId, product_id=productId, quantity=quantity, price=price, total_price=totalPrice)
                   updateCart.save()
+                  message = 'Cart item updated'
              else:
                  newCart = Cart(session_id=sessionId, product_id=productId, quantity=quantity, price=price, total_price=totalPrice)
                  newCart.save()
+                 message = 'Successfully Added to Cart.'
 
              htmlData = self.readyCartResponse(sessionId)
-             return JsonResponse({'status': 'success', 'msg': 'Successfully Added to Cart.', 'html_data': htmlData})
+             return JsonResponse({'status': 'success', 'msg': message, 'html_data': htmlData})
         else:
             messages.add_message(request, messages.WARNING, errorMessage)
             return JsonResponse({'status': 'danger', 'msg': errorMessage})

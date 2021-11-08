@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 
 productLimit = 5
 
-class Products(LoginRequiredMixin, View):
+class Products(View):
     def get(self, request):
         products = Product.objects.filter(status='active').order_by('-id')
         paginator = Paginator(products, productLimit)
@@ -23,7 +23,7 @@ class Products(LoginRequiredMixin, View):
         context = {'title': 'Products', 'page_title': 'Products', 'products': productObj }
         return render(request, 'product/list.html', context)
 
-class TaggedProducts(LoginRequiredMixin, View):
+class TaggedProducts(View):
     def get(self, request, tag):
         products = Product.objects.filter(tag='Trending', status='active').order_by('-id')
         paginator = Paginator(products, productLimit)
@@ -34,7 +34,7 @@ class TaggedProducts(LoginRequiredMixin, View):
         context['products'] = productObj
         return render(request, 'product/list.html', context)
 
-class CategoryProducts(LoginRequiredMixin, View):
+class CategoryProducts(View):
     def get(self, request, id):
         products = Product.objects.filter(category_id=id, status='active').order_by('-id')
         paginator = Paginator(products, productLimit)
@@ -47,7 +47,7 @@ class CategoryProducts(LoginRequiredMixin, View):
         context['categoryInfo'] = category
         return render(request, 'product/list.html', context)
 
-class SearchProducts(LoginRequiredMixin, View):
+class SearchProducts(View):
     def get(self, request):
         searchKey = request.GET.get('q')
         products = Product.objects.filter(name__contains=searchKey, status='active').order_by('-id')
@@ -60,7 +60,7 @@ class SearchProducts(LoginRequiredMixin, View):
         context['search'] = 'yes'
         return render(request, 'product/list.html', context)
 
-class productDetails(LoginRequiredMixin, View):
+class productDetails(View):
     def get(self, request, id):
         product = get_object_or_404(Product, pk=id)
         category = get_object_or_404(Category, pk=product.category.id)
@@ -70,10 +70,39 @@ class productDetails(LoginRequiredMixin, View):
         context['category'] = category
         return render(request, 'product/details.html', context)
 
-class AddToCartView(LoginRequiredMixin, View):
+class CartsView(View):
     def get(self, request):
-        context = {'title': 'Contact Us'}
-        return render(request, 'home/contact.html', context)
+
+        sessionId = False
+        if 'sessionId' in request.session:
+            sessionId = request.session['sessionId']
+
+        cart_items = {}
+        totalItems = 0
+        totalPrice = 0
+
+        if sessionId:
+            cart_items = Cart.objects.filter(session_id=sessionId).order_by('-id')
+            totalItems = len(cart_items)
+            prices = Cart.objects.values_list('total_price', flat=True)
+            totalPrice = sum(prices)
+
+        context = {'title': 'Shopping Cart', 'page_title': 'Shopping Cart', 'total_items': totalItems, 'cart_items': cart_items, 'total_price': totalPrice}
+        return render(request, 'product/carts.html', context)
+
+class AddToCartView(View):
+    def get(self, request, id=False):
+        Cart.objects.filter(id=id).delete()
+
+        sessionId = False
+        if 'sessionId' in request.session:
+            sessionId = request.session['sessionId']
+
+        htmlData = ''
+        if sessionId:
+            htmlData = self.readyCartResponse(sessionId)
+
+        return JsonResponse({'status': 'success', 'msg': 'Successfully Remove from cart', 'html_data': htmlData})
 
     def post(self, request):
 
@@ -107,22 +136,24 @@ class AddToCartView(LoginRequiredMixin, View):
                  newCart = Cart(session_id=sessionId, product_id=productId, quantity=quantity, price=price, total_price=totalPrice)
                  newCart.save()
 
-             cartData = Cart.objects.filter(session_id=sessionId).order_by('-id').values()
-             cartData2 = Cart.objects.filter(session_id=sessionId).order_by('-id')
-             totalItem = len(cartData)
-             prices = Cart.objects.values_list('total_price', flat=True)
-             totalPrice = sum(prices)
-
-             htmlData = render_to_string('product/cart_data.html', {'cart_items': cartData2, 'total_cart_item': totalItem, 'cart_item_total_price': totalPrice})
-
-             return JsonResponse({'status': 'success', 'msg': 'Successfully Added to Cart.', 'cart_items': list(cartData), 'total_items': totalItem, 'total_price': totalPrice, 'html_data': htmlData})
+             htmlData = self.readyCartResponse(sessionId)
+             return JsonResponse({'status': 'success', 'msg': 'Successfully Added to Cart.', 'html_data': htmlData})
         else:
             messages.add_message(request, messages.WARNING, errorMessage)
             return JsonResponse({'status': 'danger', 'msg': errorMessage})
 
+    def readyCartResponse(self, sessionId):
+        cartData = Cart.objects.filter(session_id=sessionId).order_by('-id')
+        totalItem = len(cartData)
+        prices = Cart.objects.values_list('total_price', flat=True)
+        totalPrice = sum(prices)
+
+        htmlData = render_to_string('product/cart_data.html', {'cart_items': cartData, 'total_cart_item': totalItem,
+                                                               'cart_item_total_price': totalPrice})
+        return htmlData
 
 
-class AddView(LoginRequiredMixin, View):
+class AddView(View):
     def get(self, request):
         context = {'title': 'Add Product', 'page_title': 'Add Product'}
         context['form'] = ProductForm()

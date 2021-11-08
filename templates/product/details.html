@@ -63,13 +63,6 @@
                         <div class="product-details">
                             <h1 class="product-title">{{ product.name }}</h1><!-- End .product-title -->
 
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
-                                <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
-                            </div><!-- End .rating-container -->
-
                             <div class="product-price">
                                 ${{ product.price }}
                             </div><!-- End .product-price -->
@@ -80,11 +73,16 @@
 
                             <div class="product-details-action">
                                 <div class="details-action-col">
-                                    <div class="product-details-quantity">
-                                        <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                    </div><!-- End .product-details-quantity -->
+                                    <form method="POST" action="{% url 'product.add-to-cart' %}">
+                                        <div class="product-details-quantity">
+                                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                        </div><!-- End .product-details-quantity -->
+                                        {% csrf_token %}
+                                        <input type="hidden" name="product_id" value="{{product.id}}">
+                                        <input type="hidden" name="price" value="{{product.price}}">
+                                        <a href="javascript:void(0)" class="btn-product btn-cart mt-3"><span>add to cart</span></a>
+                                    </form>
 
-                                    <a href="javascript:void()" class="btn-product btn-cart"><span>add to cart</span></a>
                                 </div><!-- End .details-action-col -->
 
                             </div><!-- End .product-details-action -->

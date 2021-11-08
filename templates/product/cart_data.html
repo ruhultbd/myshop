@@ -1,7 +1,9 @@
     <div class="dropdown cart-dropdown">
         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
             <i class="icon-shopping-cart"></i>
+            {% if total_cart_item > 0 %}
             <span class="cart-count total-cart-item">{{total_cart_item}}</span>
+            {% endif %}
         </a>
 
         <div class="dropdown-menu dropdown-menu-right">
@@ -26,7 +28,8 @@
                                     <img style="height:45px" src="{{cart_item.product.image.url}}" alt="{{cart_item.product.name}}">
                                 </a>
                             </figure>
-                            <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                            <a href="javascript:void(0)" url="{% url 'product.remove-from-cart' cart_item.id %}" class="btn-remove cart-item-remove" title="Remove Product"><i class="icon-close"></i></a>
+
                         </div><!-- End .product -->
                     {% endfor %}
                 {% else %}
@@ -41,7 +44,7 @@
                 <span class="cart-total-price">${{cart_item_total_price}}</span>
             </div><!-- End .dropdown-cart-total -->
             <div class="dropdown-cart-action">
-                <a href="cart.html" class="btn btn-primary">View Cart</a>
+                <a href="{% url 'product.carts' %}" class="btn btn-primary">View Cart</a>
                 <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
             </div><!-- End .dropdown-cart-total -->
             {% endif %}

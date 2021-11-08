@@ -4,8 +4,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from product.models import Category, Product
+from product.models import Category, Product, Cart
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+import uuid
+from django.db.models import Sum
+from django.template.loader import render_to_string
 
 productLimit = 5
 
@@ -65,6 +69,57 @@ class productDetails(LoginRequiredMixin, View):
         context['product'] = product
         context['category'] = category
         return render(request, 'product/details.html', context)
+
+class AddToCartView(LoginRequiredMixin, View):
+    def get(self, request):
+        context = {'title': 'Contact Us'}
+        return render(request, 'home/contact.html', context)
+
+    def post(self, request):
+
+        if 'sessionId' in request.session:
+            sessionId = request.session['sessionId']
+        else:
+            sessionId = str(uuid.uuid4())
+            request.session['sessionId'] = sessionId
+
+        productId = request.POST['product_id']
+        quantity = int(request.POST['quantity'])
+        price = float(request.POST['price'])
+        totalPrice = float(quantity*price)
+
+        errorMessage = None
+        if (not productId):
+             errorMessage = 'Product Id is required.'
+        if (not quantity):
+             errorMessage = 'Product quantity is required.'
+        if (not price):
+             errorMessage = 'Product price is required.'
+
+        if not errorMessage:
+             hasCart = Cart.objects.filter(session_id=sessionId, product_id=productId).first()
+             if hasCart:
+                  quantity = int(quantity + hasCart.quantity)
+                  totalPrice = float(quantity*price)
+                  updateCart = Cart(id=hasCart.id,session_id=sessionId, product_id=productId, quantity=quantity, price=price, total_price=totalPrice)
+                  updateCart.save()
+             else:
+                 newCart = Cart(session_id=sessionId, product_id=productId, quantity=quantity, price=price, total_price=totalPrice)
+                 newCart.save()
+
+             cartData = Cart.objects.filter(session_id=sessionId).order_by('-id').values()
+             cartData2 = Cart.objects.filter(session_id=sessionId).order_by('-id')
+             totalItem = len(cartData)
+             prices = Cart.objects.values_list('total_price', flat=True)
+             totalPrice = sum(prices)
+
+             htmlData = render_to_string('product/cart_data.html', {'cart_items': cartData2, 'total_cart_item': totalItem, 'cart_item_total_price': totalPrice})
+
+             return JsonResponse({'status': 'success', 'msg': 'Successfully Added to Cart.', 'cart_items': list(cartData), 'total_items': totalItem, 'total_price': totalPrice, 'html_data': htmlData})
+        else:
+            messages.add_message(request, messages.WARNING, errorMessage)
+            return JsonResponse({'status': 'danger', 'msg': errorMessage})
+
 
 
 class AddView(LoginRequiredMixin, View):

@@ -63,7 +63,13 @@
                 <!--                            </div>-->
 
                                             <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                                <form method="POST" class="w-100" action="{% url 'product.add-to-cart' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_id" value="{{item.id}}">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <input type="hidden" name="price" value="{{item.price}}">
+                                                    <a href="javascript:void(0)" class="btn-product btn-cart"><span>add to cart</span></a>
+                                                </form>
                                             </div><!-- End .product-action -->
                                         </figure><!-- End .product-media -->
 

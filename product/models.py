@@ -51,3 +51,12 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Product, self).save(*args, **kwargs)
+
+class Cart(models.Model):
+    session_id = models.CharField(max_length=200, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    quantity = models.IntegerField(default=0)
+    price = models.FloatField(default=0)
+    total_price = models.FloatField(default=0)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)

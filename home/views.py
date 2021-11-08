@@ -29,3 +29,4 @@ class ContactView(View):
     def get(self, request):
         context = {'title': 'Contact Us'}
         return render(request, 'home/contact.html', context)
+

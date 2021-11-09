@@ -18,7 +18,7 @@ def cart_items(request):
          cartData = Cart.objects.filter(session_id=sessionId).order_by('-id')
          totalItem = len(cartData)
 
-         amounts = Cart.objects.values_list('total_price', flat=True)
+         amounts = Cart.objects.filter(session_id=sessionId).values_list('total_price', flat=True)
          totalPrice = sum(amounts)
 
     return {'cart_items': cartData, 'total_cart_item': totalItem, 'cart_item_total_price': totalPrice}

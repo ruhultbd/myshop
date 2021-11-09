@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-header text-center" style="background-image: url({%  static 'assets/images/page-header-bg.jpg' %})">
+    <div class="container">
+        <h1 class="page-title">{{title}}</h1>
+    </div><!-- End .container -->
+</div><!-- End .page-header -->
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+        <ol class="breadcrumb col-lg-8 col-md-10 col-sm-12 m-auto">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="checkout">
+        <div class="container">
+            <div class="col-lg-8 col-md-10 col-sm-12 pl-0 pr-0 m-auto">
+                <form action="#">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <h2 class="checkout-title mt-0">Shipping Details</h2><!-- End .checkout-title -->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label>Full Name *</label>
+                                        <input type="text" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+                                </div><!-- End .row -->
+
+                                <label>Street address *</label>
+                                <input type="text" class="form-control" placeholder="House number and Street name" required>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Town / City *</label>
+                                        <input type="text" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <div class="col-sm-6">
+                                        <label>Area *</label>
+                                        <input type="text" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+                                </div><!-- End .row -->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Postcode / ZIP *</label>
+                                        <input type="text" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <div class="col-sm-6">
+                                        <label>Phone *</label>
+                                        <input type="tel" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+                                </div><!-- End .row -->
+
+                                <label>Email address *</label>
+                                <input type="email" class="form-control" required>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
+                                    <label class="custom-control-label" for="checkout-create-acc">Create an account?</label>
+                                </div><!-- End .custom-checkbox -->
+
+                                <label>Order notes (optional)</label>
+                                <textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                        </div><!-- End .col-lg-9 -->
+                        <aside class="col-lg-3">
+                            <div class="summary">
+                                <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+                                <table class="table table-summary">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% if cart_items %}
+                                            {% for cart_item in cart_items %}
+                                            <tr>
+                                                <td><a href="{% url 'product.details' cart_item.product_id %}">{{cart_item.product.name}}</a></td>
+                                                <td>${{cart_item.total_price}}</td>
+                                            </tr>
+
+                                            {% endfor %}
+                                        {% endif %}
+
+
+                                        <tr class="summary-subtotal">
+                                            <td>Subtotal:</td>
+                                            <td>$160.00</td>
+                                        </tr><!-- End .summary-subtotal -->
+                                        <tr>
+                                            <td>Shipping:</td>
+                                            <td>$0.00</td>
+                                        </tr>
+                                        <tr class="summary-total">
+                                            <td>Total:</td>
+                                            <td>$160.00</td>
+                                        </tr><!-- End .summary-total -->
+                                    </tbody>
+                                </table><!-- End .table table-summary -->
+
+                                <div class="accordion-summary" id="accordion-payment">
+                                    <div class="card">
+                                        <div class="card-header" id="heading-1">
+                                            <h2 class="card-title">
+                                                <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+                                                    Cash on delivery
+                                                </a>
+                                            </h2>
+                                        </div><!-- End .card-header -->
+                                        <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
+
+                                        </div><!-- End .collapse -->
+                                    </div><!-- End .card -->
+
+                                </div><!-- End .accordion -->
+
+                                <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                    <span class="btn-text">Place Order</span>
+                                    <span class="btn-hover-text">Proceed to Checkout</span>
+                                </button>
+                            </div><!-- End .summary -->
+                        </aside><!-- End .col-lg-3 -->
+                    </div><!-- End .row -->
+                </form>
+            </div>
+        </div><!-- End .container -->
+    </div><!-- End .checkout -->
+</div><!-- End .page-content -->
+
+{% endblock  %}

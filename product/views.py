@@ -71,13 +71,28 @@ class productDetails(View):
         return render(request, 'product/details.html', context)
 
 class CartsView(View):
-    def get(self, request, id=False):
-
-        if id:
-            Cart.objects.filter(id=id).delete()
+    def get(self, request):
 
         context = {'carts':'yes','title': 'Shopping Cart', 'page_title': 'Shopping Cart'}
         return render(request, 'product/carts.html', context)
+
+    def post(self, request):
+        cart_ids = request.POST.getlist('cart_id[]')
+        cart_qtys = request.POST.getlist('cart_quantity[]')
+
+        for index, card_id in enumerate(cart_ids):
+            quantity = int(cart_qtys[index])
+
+            cartData = Cart.objects.filter(id=card_id).first()
+
+            quantity = int(quantity)
+            totalPrice = float(quantity * cartData.price)
+            updateCart = Cart(id=cartData.id, session_id=cartData.session_id, product_id=cartData.product_id, quantity=quantity, price=cartData.price, total_price=totalPrice)
+            updateCart.save()
+
+        messages.add_message(request, messages.SUCCESS, 'Cart info successfully updated')
+        return redirect('/product/carts')
+
 
 class AddToCartView(View):
     def get(self, request, id=False):
@@ -142,6 +157,12 @@ class AddToCartView(View):
         htmlData = render_to_string('product/cart_data.html', {'cart_items': cartData, 'total_cart_item': totalItem,
                                                                'cart_item_total_price': totalPrice})
         return htmlData
+
+class CheckoutView(View):
+    def get(self, request):
+        context = {'carts':'yes', 'title': 'Checkout', 'page_title': 'Checkout'}
+        return render(request, 'product/checkout.html', context)
+
 
 
 class AddView(View):
